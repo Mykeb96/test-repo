@@ -1,0 +1,141 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mykael Barnes</title>
+  </head>
+  <body>
+    <div id="app">
+
+        
+        <h1 id='name'>Mykael Barnes</h1>
+        
+        <img class='contact-button button1' src="email_closed.png" onmouseover="this.src='email_open.png'" onmouseleave="this.src='email_closed.png'" data-micromodal-trigger="modal-1" href='javascript:void(0);' onclick="MicroModal.show('modal-1');"/>
+
+        <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="modal-container" class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+              <header id="modal-header" class="modal__header">
+                <h2 class="modal__title">
+                  Mykael.Barnes@hotmail.com
+                </h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+              </header>
+              <div id="modal-content-content" class="modal-content-content">
+
+                <form id="contact-form">
+                  <input type="hidden" name="contact_number">
+
+                <label>Subject</label>
+                  <input type='text' name="subject-entry" class='form-entry' id="subject-entry" required="required"/>
+
+                  <label>Your Email</label>
+                  <input type='email' name="email-entry" class='form-entry' id="email-entry" required="required"/>
+
+                  <label>Message</label>
+                  <textarea type='text' name="message-entry" class='form-entry' id="message-entry" required="required"></textarea>
+
+                  <footer id="modal-footer" class="modal__footer">
+                    <button class="modal__btn"  type='submit' aria-label="Close this dialog window" value="Send" >Send</button>
+                  </footer>
+
+                </form>
+
+                  <div id="modal-content" class="modal__content" style="display:none;">
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="modal micromodal-slide" id="modal-2" aria-hidden="true">
+          <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+            <div id="modal-container" class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+              <header id="modal-header" class="modal__header">
+                <h2 class="modal__title">
+                  Mykael.Barnes@hotmail.com
+                </h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+              </header>
+              <div id="modal-content-content" class="modal-content-content">
+                <h2 id="email-sent">Email successfully Sent!</h2>
+
+                  <div id="modal-content" class="modal__content" style="display:none;">
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    
+    
+
+        
+
+
+    </div>
+
+    <canvas id="bg"></canvas>
+
+
+
+    <script type="module" src="/main.js"></script>
+    <!-- <script type="module" src="modal.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/micromodal/dist/micromodal.min.js"></script>
+
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+      (function(){
+          emailjs.init("ZPKWLE45eyD2Ow-85");
+      })();
+    </script>
+    <script type="text/javascript">
+      window.onload = function() {
+          document.getElementById('contact-form').addEventListener('submit', function(event) {
+              event.preventDefault();
+              document.getElementById('contact-form').style['cursor'] = 'wait';
+              // generate a five digit number for the contact_number variable
+              this.contact_number.value = Math.random() * 100000 | 0;
+              // these IDs from the previous steps
+              emailjs.sendForm('contact_service', 'contact_form', this)
+                  .then(function() {
+                      console.log('SUCCESS!');
+                      document.getElementById('subject-entry').value = '';
+                      document.getElementById('email-entry').value = '';
+                      document.getElementById('message-entry').value = '';
+                      document.getElementById('contact-form').style['cursor'] = 'pointer';
+                      MicroModal.close('modal-1');
+                      MicroModal.show('modal-2');
+    
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+          });
+      }
+  </script>
+
+  <!-- <script type="text/javascript">
+    window.onload = function() {
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+      })
+    }
+  </script> -->
+
+  </body>
+</html>

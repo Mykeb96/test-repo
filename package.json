@@ -1,0 +1,19 @@
+{
+  "name": "demo-project",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "vite": "^2.7.2"
+  },
+  "dependencies": {
+    "emailjs-com": "^3.2.0",
+    "gh-pages": "^3.2.3",
+    "micromodal": "^0.4.10",
+    "three": "^0.136.0"
+  }
+}
